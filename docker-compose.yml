@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  qq-robot:
+    build: .
+    container_name: qq-robot-server
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      # 挂载宿主机的时区
+      - TZ=Asia/Shanghai
+    volumes:
+      # 将 SQLite 数据库挂载出来，保证重启不丢数据
+      - ./data:/app/data
+      # 将人物档案挂载出来，避免重置丢失人设
+      - ./profiles:/app/profiles
+      # 将环境变量挂载进去
+      - ./.env:/app/.env
+      # (可选) 如果你希望图片缓存在宿主机可见，可以将 /tmp 挂载出来
+      - ./tmp:/tmp
+    network_mode: "host" # 方便直接与宿主机的 napcat 容器（172.17.0.1:3000）通信

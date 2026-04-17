@@ -1,0 +1,9 @@
+{
+  "name": "qq-robot-render",
+  "version": "1.0.0",
+  "description": "Puppeteer renderer for QQ robot",
+  "main": "render_card.js",
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  }
+}
